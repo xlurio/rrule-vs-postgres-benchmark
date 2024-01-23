@@ -1,0 +1,20 @@
+services:
+  database:
+    image: postgres:16.1
+    environment:
+      - POSTGRES_USER=rrulexpostgres
+      - POSTGRES_PASSWORD=rrulexpostgres
+      - POSTGRES_DB=rrulexpostgres
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    volumes:
+      - ".:/app"
+
+    command: sh -c "python main.py"
+
+    depends_on:
+      - database
